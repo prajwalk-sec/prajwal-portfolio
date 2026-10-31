@@ -56,7 +56,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative isolate min-h-screen w-full flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
+      className="relative isolate min-h-screen w-full flex flex-col justify-center px-4 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
     >
       {/* Background Micro-Grid */}
       <div
@@ -72,14 +72,14 @@ export default function AboutSection() {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl my-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 items-center">
           {/* LEFT COLUMN: Editorial Bio */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <p className="mb-3 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#E60000] font-['Plus_Jakarta_Sans',_sans-serif]">
               ABOUT ME
             </p>
 
-            <h1 className="font-['Plus_Jakarta_Sans',_sans-serif] text-3xl sm:text-5xl font-black uppercase tracking-tighter leading-[1.02] text-neutral-900 mb-6">
+            <h1 className="font-['Plus_Jakarta_Sans',_sans-serif] text-[clamp(1.75rem,7vw,3rem)] sm:text-5xl font-black uppercase tracking-tighter leading-[1.02] text-neutral-900 mb-6">
               ENGINEERING SCALABLE SYSTEMS WITH PRECISION &amp; CREATIVITY.
             </h1>
 
@@ -101,14 +101,14 @@ export default function AboutSection() {
           </div>
 
           {/* CENTER COLUMN: Portrait Cutout with Red Backdrop */}
-          <div className="lg:col-span-3 flex justify-center items-end relative h-[380px] sm:h-[450px] lg:h-[480px]">
+          <div className="lg:col-span-3 flex justify-center items-end relative h-[320px] min-w-0 sm:h-[450px] lg:h-[480px]">
             {/* Red Accent Box */}
             <motion.div
               aria-hidden="true"
               initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="absolute bottom-0 right-4 lg:right-0 w-[78%] h-[88%] bg-[#E60000] rounded-xl z-0 shadow-lg"
+              className="absolute bottom-0 right-4 lg:right-0 w-[78%] max-w-full h-[88%] bg-[#E60000] rounded-xl z-0 shadow-lg"
             />
             {/* Portrait Cutout */}
             <img

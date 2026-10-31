@@ -35,7 +35,7 @@ const contactCards = [
     description:
       "Connect with my professional network, career updates, and background milestones.",
     linkText: "View Profile",
-    href: "https://linkedin.com", // TODO: replace with your LinkedIn profile URL
+    href: "https://www.linkedin.com/in/prajwalkamalaksha/",
     icon: <FaLinkedin />,
     rotate: -1,
     pinColor: "bg-[#E60000]",
@@ -46,7 +46,7 @@ const contactCards = [
     description:
       "Explore my source code repositories, full-stack apps, and open-source contributions.",
     linkText: "Explore Repos",
-    href: "https://github.com", // TODO: replace with your GitHub profile URL
+    href: "https://github.com/PrajwalK-dev",
     icon: <FaGithub />,
     rotate: 2,
     pinColor: "bg-neutral-900",
@@ -89,7 +89,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative isolate min-h-screen w-full flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
+      className="relative isolate min-h-screen w-full flex flex-col justify-center px-4 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
     >
       {/* Background Micro-Grid */}
       <div
@@ -104,13 +104,13 @@ export default function ContactSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl my-auto space-y-12">
+      <div className="relative z-10 mx-auto w-full max-w-6xl my-auto space-y-10 sm:space-y-12 lg:-translate-y-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto">
           <p className="mb-2 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#E60000] font-['Plus_Jakarta_Sans',_sans-serif]">
             GET IN TOUCH
           </p>
-          <h2 className="font-['Plus_Jakarta_Sans',_sans-serif] text-3xl sm:text-5xl font-black uppercase tracking-tighter leading-tight text-neutral-900 mb-4">
+          <h2 className="font-['Plus_Jakarta_Sans',_sans-serif] text-[clamp(1.75rem,7vw,3rem)] sm:text-5xl font-black uppercase tracking-tighter leading-tight text-neutral-900 mb-4">
             LET&apos;S BUILD <span className="text-[#E60000]">TOGETHER.</span>
           </h2>
           <p className="text-neutral-600 text-sm sm:text-base font-['Plus_Jakarta_Sans',_sans-serif] leading-relaxed font-medium">
@@ -120,7 +120,7 @@ export default function ContactSection() {
         </div>
 
         {/* Pinned Sticky Notes Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-6">
           {contactCards.map((card, idx) => {
             const isExternal = card.href.startsWith("http");
             return (
@@ -143,7 +143,7 @@ export default function ContactSection() {
                     ? undefined
                     : { y: -8, scale: 1.03, rotate: 0 }
                 }
-                className="group relative flex flex-col justify-between p-6 bg-neutral-50/90 rounded-2xl border border-neutral-200/90 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(230,0,0,0.12)] hover:border-[#E60000]/50 transition-[box-shadow,border-color] duration-300 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000]"
+                className="group relative flex min-w-0 flex-col justify-between p-5 sm:p-6 bg-neutral-50/90 rounded-2xl border border-neutral-200/90 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(230,0,0,0.12)] hover:border-[#E60000]/50 transition-[box-shadow,border-color] duration-300 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000]"
               >
                 {/* Push Pin Graphic */}
                 <div

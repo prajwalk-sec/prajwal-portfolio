@@ -1,16 +1,2 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
-  <!-- Background -->
-  <rect width="500" height="500" fill="#435AA9" />
-
-  <!-- Monogram Logo Path -->
-  <g fill="#FFFFFF">
-    <!-- Left Structure ('P') -->
-    <path d="M 228,82.5 L 96.5,158.5 V 211 L 183.5,160.5 V 237.5 L 96.5,287.5 V 411 L 140,386 V 284 L 228,233 V 82.5 Z" />
-    
-    <!-- Central Bottom Chevron -->
-    <path d="M 230,285.5 L 193,307 V 360 L 230,338.5 L 267,360 V 307 Z" />
-
-    <!-- Right Structure ('K') -->
-    <path d="M 245,82.5 V 390 L 288.5,415.5 V 252.5 L 375,302.5 L 341.5,248.5 L 288.5,217.5 L 375.5,167 L 333,132.5 L 288.5,158 V 107.5 Z" />
-  </g>
-</svg>
+<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><defs><style>.a{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;}</style></defs><path class="a" d="M24,42.5c3.61,0,5.24-1.49,7.9-3,2.11-1.19,5.2-1.39,6.47-2.72a12.15,12.15,0,0,0,3.32-9.31c0-1.95-.95-4.83-.95-5.6S44.54,5.5,40,5.5c-3.29,0-10.49,8.17-10.49,8.17A11.34,11.34,0,0,0,24,11.92a11.34,11.34,0,0,0-5.53,1.75S11.27,5.5,8,5.5c-4.52,0-.72,15.62-.72,16.39s-1,3.65-1,5.6A12.15,12.15,0,0,0,9.63,36.8c1.27,1.33,4.36,1.53,6.47,2.72C18.76,41,20.39,42.5,24,42.5Z"/></svg>

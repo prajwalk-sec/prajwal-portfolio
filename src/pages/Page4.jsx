@@ -101,7 +101,7 @@ export default function ProjectsSection() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative isolate min-h-screen w-full flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
+      className="relative isolate min-h-screen w-full flex flex-col justify-center px-4 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -162,16 +162,23 @@ export default function ProjectsSection() {
         </div>
 
         {/* Compact Editorial Grid Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {filteredProjects.map((project, idx) => (
             <motion.div
               key={project.id}
-              layout
-              initial={{ opacity: 0, y: 15 }}
+              layout={!shouldReduceMotion}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3, delay: idx * 0.08 }}
-              className={`group relative h-[300px] rounded-2xl overflow-hidden p-5 flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${project.bgTheme}`}
+              exit={
+                shouldReduceMotion
+                  ? { opacity: 1 }
+                  : { opacity: 0, scale: 0.95 }
+              }
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.3,
+                delay: shouldReduceMotion ? 0 : idx * 0.08,
+              }}
+              className={`group relative min-h-[300px] h-auto min-w-0 rounded-2xl overflow-hidden p-4 sm:p-5 flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${project.bgTheme}`}
             >
               {/* Top Accent Gradient overlay */}
               <div

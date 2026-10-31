@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 // Single source of truth for route order and legacy aliases.
 const links = [
@@ -15,21 +16,18 @@ const getRouteIndex = (path) =>
   links.findIndex((l) => l.href === path || l.aliases.includes(path));
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const [openPath, setOpenPath] = useState(null);
+  const menuOpen = openPath === location.pathname;
+  const shouldReduceMotion = useReducedMotion();
 
   const currentIndex = getRouteIndex(location.pathname);
-
-  // Close the mobile menu on any route change (including wheel navigation).
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
 
   // Close the mobile menu with Escape.
   useEffect(() => {
     if (!menuOpen) return;
     const onKeyDown = (e) => {
-      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key === "Escape") setOpenPath(null);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -43,7 +41,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-neutral-200/80 bg-white/90 text-neutral-800 backdrop-blur-xl">
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6"
+        className="navbar-inner mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6"
       >
         {/* Brand Logo with JetBrains Mono */}
         <Link
@@ -98,42 +96,56 @@ export default function Navbar() {
           aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          onClick={() => setMenuOpen((open) => !open)}
-          className="rounded-md px-2 text-2xl text-neutral-700 hover:text-[#E60000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E60000] md:hidden"
+          onClick={() =>
+            setOpenPath((path) =>
+              path === location.pathname ? null : location.pathname
+            )
+          }
+          className="flex h-11 w-11 items-center justify-center rounded-md text-2xl text-neutral-700 hover:text-[#E60000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E60000] md:hidden"
         >
           <span aria-hidden="true">{menuOpen ? "×" : "☰"}</span>
         </button>
       </nav>
 
       {/* Mobile Menu Dropdown */}
-      {menuOpen && (
-        <div
-          id="mobile-menu"
-          className="border-t border-neutral-200 bg-white px-4 py-3 md:hidden"
-        >
-          <div className="mx-auto flex max-w-7xl flex-col gap-1">
-            {links.map((link, index) => {
-              const isActive = index === currentIndex;
+      <AnimatePresence initial={false}>
+        {menuOpen && (
+          <motion.div
+            id="mobile-menu"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.2,
+              ease: "easeInOut",
+            }}
+            className="overflow-hidden border-t border-neutral-200 bg-white px-4 md:hidden"
+          >
+            <div className="mx-auto flex max-w-7xl flex-col gap-1 py-3">
+              {links.map((link, index) => {
+                const isActive = index === currentIndex;
 
-              return (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  state={{ pageDirection: getDirection(index) }}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`w-full rounded-xl px-4 py-3 text-left text-sm font-semibold font-['Plus_Jakarta_Sans',_sans-serif] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E60000] ${
-                    isActive
-                      ? "bg-red-50 text-[#E60000]"
-                      : "text-neutral-600 hover:bg-neutral-100"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      )}
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    state={{ pageDirection: getDirection(index) }}
+                    onClick={() => setOpenPath(null)}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`flex min-h-11 w-full items-center rounded-xl px-4 py-3 text-left text-sm font-semibold font-['Plus_Jakarta_Sans',_sans-serif] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E60000] ${
+                      isActive
+                        ? "bg-red-50 text-[#E60000]"
+                        : "text-neutral-600 hover:bg-neutral-100"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

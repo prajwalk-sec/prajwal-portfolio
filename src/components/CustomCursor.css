@@ -34,3 +34,27 @@
     display: none;
   }
 }
+
+@media (pointer: coarse) {
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    cursor: auto;
+  }
+
+  .custom-cursor {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  @supports (padding: max(0px)) {
+    .navbar-inner {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+  }
+}

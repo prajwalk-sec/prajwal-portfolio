@@ -32,6 +32,7 @@ function App() {
 
   useLayoutEffect(() => {
     previousPath.current = location.pathname;
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] text-neutral-800">
+    <div className="min-h-screen w-full overflow-x-clip bg-[#F8F9FA] text-neutral-800">
       {/* 1. Render your custom cursor here so it's active across all pages */}
       <CustomCursor />
       
