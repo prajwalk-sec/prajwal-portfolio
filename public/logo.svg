@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="500" height="500" fill="#435AA9" />
+
+  <!-- Monogram Logo Path -->
+  <g fill="#FFFFFF">
+    <!-- Left Structure ('P') -->
+    <path d="M 228,82.5 L 96.5,158.5 V 211 L 183.5,160.5 V 237.5 L 96.5,287.5 V 411 L 140,386 V 284 L 228,233 V 82.5 Z" />
+    
+    <!-- Central Bottom Chevron -->
+    <path d="M 230,285.5 L 193,307 V 360 L 230,338.5 L 267,360 V 307 Z" />
+
+    <!-- Right Structure ('K') -->
+    <path d="M 245,82.5 V 390 L 288.5,415.5 V 252.5 L 375,302.5 L 341.5,248.5 L 288.5,217.5 L 375.5,167 L 333,132.5 L 288.5,158 V 107.5 Z" />
+  </g>
+</svg>
