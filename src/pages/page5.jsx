@@ -1,7 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaPhoneAlt, FaLinkedin, FaGithub } from "react-icons/fa";
+import useSectionNavigation from "../hooks/useSectionNavigation";
 
 // `rotate` is in degrees and is applied through framer-motion (not a Tailwind
 // class), because framer-motion writes an inline `transform` that would
@@ -55,36 +54,7 @@ const contactCards = [
 
 export default function ContactSection() {
   const shouldReduceMotion = useReducedMotion();
-  const navigate = useNavigate();
-  // Starts locked so trackpad inertia from the previous page can't
-  // immediately trigger another navigation. Unlocks after a short delay.
-  const hasNavigated = useRef(true);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const unlockTimer = setTimeout(() => {
-      hasNavigated.current = false;
-    }, 700);
-
-    const handleWheel = (event) => {
-      if (hasNavigated.current || Math.abs(event.deltaY) <= 24) return;
-
-      const isAtTop = window.scrollY < 80;
-
-      // Last page: only upward navigation exists
-      if (event.deltaY < 0 && isAtTop) {
-        hasNavigated.current = true;
-        navigate("/projects", { state: { pageDirection: -1 } });
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => {
-      clearTimeout(unlockTimer);
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [navigate]);
+  useSectionNavigation({ previousPath: "/projects" });
 
   return (
     <section

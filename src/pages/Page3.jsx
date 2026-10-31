@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import useSectionNavigation from "../hooks/useSectionNavigation";
 import {
   SiPython,
   SiDjango,
@@ -74,39 +73,10 @@ const SANS = "font-['Plus_Jakarta_Sans',_sans-serif]";
 
 export default function SkillsSection() {
   const shouldReduceMotion = useReducedMotion();
-  const navigate = useNavigate();
-  const hasNavigated = useRef(true);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const unlockTimer = setTimeout(() => {
-      hasNavigated.current = false;
-    }, 700);
-
-    const handleWheel = (event) => {
-      if (hasNavigated.current || Math.abs(event.deltaY) <= 24) return;
-
-      const isAtTop = window.scrollY < 80;
-      const isAtBottom =
-        window.scrollY + window.innerHeight >=
-        document.documentElement.scrollHeight - 24;
-
-      if (event.deltaY < 0 && isAtTop) {
-        hasNavigated.current = true;
-        navigate("/about", { state: { pageDirection: -1 } });
-      } else if (event.deltaY > 0 && isAtBottom) {
-        hasNavigated.current = true;
-        navigate("/projects", { state: { pageDirection: 1 } });
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => {
-      clearTimeout(unlockTimer);
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [navigate]);
+  useSectionNavigation({
+    previousPath: "/about",
+    nextPath: "/projects",
+  });
 
   return (
     <section

@@ -1,7 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { FaDownload } from "react-icons/fa";
+import useSectionNavigation from "../hooks/useSectionNavigation";
 
 const SKILL_BARS = [
   { name: "BACKEND ENGINEERING", percentage: 95 },
@@ -17,41 +16,7 @@ const RESUME_HREF = `/${encodeURIComponent(RESUME_FILE_NAME)}`;
 
 export default function AboutSection() {
   const shouldReduceMotion = useReducedMotion();
-  const navigate = useNavigate();
-  // Starts locked so trackpad inertia from the previous page can't
-  // immediately trigger another navigation. Unlocks after a short delay.
-  const hasNavigated = useRef(true);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const unlockTimer = setTimeout(() => {
-      hasNavigated.current = false;
-    }, 700);
-
-    const handleWheel = (event) => {
-      if (hasNavigated.current || Math.abs(event.deltaY) <= 24) return;
-
-      const isAtTop = window.scrollY < 80;
-      const isAtBottom =
-        window.scrollY + window.innerHeight >=
-        document.documentElement.scrollHeight - 24;
-
-      if (event.deltaY < 0 && isAtTop) {
-        hasNavigated.current = true;
-        navigate("/", { state: { pageDirection: -1 } });
-      } else if (event.deltaY > 0 && isAtBottom) {
-        hasNavigated.current = true;
-        navigate("/skills", { state: { pageDirection: 1 } });
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => {
-      clearTimeout(unlockTimer);
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [navigate]);
+  useSectionNavigation({ previousPath: "/", nextPath: "/skills" });
 
   return (
     <section

@@ -1,41 +1,15 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import useSectionNavigation from "../hooks/useSectionNavigation";
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
-  const navigate = useNavigate();
-  // Starts locked so trackpad inertia from a previous page can't trigger
-  // an immediate navigation. Unlocks after a short delay.
-  const hasNavigatedToAbout = useRef(true);
 
-  useEffect(() => {
-    // Use wheel navigation only on desktop devices.
-    const isDesktop = window.matchMedia("(min-width: 1024px)");
-    if (!isDesktop.matches || shouldReduceMotion) return;
-
-    const unlockTimer = setTimeout(() => {
-      hasNavigatedToAbout.current = false;
-    }, 700);
-
-    const handleWheel = (event) => {
-      if (
-        event.deltaY > 24 &&
-        window.scrollY < 80 &&
-        !hasNavigatedToAbout.current
-      ) {
-        hasNavigatedToAbout.current = true;
-        navigate("/about", { state: { pageDirection: 1 } });
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: true });
-
-    return () => {
-      clearTimeout(unlockTimer);
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [navigate, shouldReduceMotion]);
+  useSectionNavigation({
+    nextPath: "/about",
+    wheelNextAtTop: true,
+    shouldReduceMotion,
+  });
 
   return (
     <section

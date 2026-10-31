@@ -1,8 +1,8 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { FaGithub, FaExternalLinkAlt, FaShieldAlt } from "react-icons/fa";
 import { SiDjango, SiPostgresql, SiTailwindcss, SiPython } from "react-icons/si";
+import useSectionNavigation from "../hooks/useSectionNavigation";
 
 const PROJECTS_DATA = [
   {
@@ -64,34 +64,12 @@ const FILTER_TABS = [
 
 export default function ProjectsSection() {
   const shouldReduceMotion = useReducedMotion();
-  const navigate = useNavigate();
-  const sectionRef = useRef(null);
-  const hasNavigated = useRef(false);
   const [activeTab, setActiveTab] = useState("all");
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const handleWheel = (event) => {
-      if (hasNavigated.current || Math.abs(event.deltaY) <= 24) return;
-
-      const isAtTop = window.scrollY < 80;
-      const isAtBottom =
-        window.scrollY + window.innerHeight >=
-        document.documentElement.scrollHeight - 24;
-
-      if (event.deltaY < 0 && isAtTop) {
-        hasNavigated.current = true;
-        navigate("/skills", { state: { pageDirection: -1 } });
-      } else if (event.deltaY > 0 && isAtBottom) {
-        hasNavigated.current = true;
-        navigate("/contact", { state: { pageDirection: 1 } });
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, [navigate]);
+  useSectionNavigation({
+    previousPath: "/skills",
+    nextPath: "/contact",
+  });
 
   const filteredProjects = PROJECTS_DATA.filter(
     (project) => activeTab === "all" || project.category === activeTab
@@ -99,7 +77,6 @@ export default function ProjectsSection() {
 
   return (
     <section
-      ref={sectionRef}
       id="projects"
       className="relative isolate min-h-screen w-full flex flex-col justify-center px-4 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
     >
