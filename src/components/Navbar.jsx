@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 // Single source of truth for route order and legacy aliases.
 const links = [
@@ -11,9 +12,18 @@ const links = [
   { name: "Contact", href: "/contact", aliases: ["/page5"] },
 ];
 
-// Returns the position of a path in the route order, or -1 if unknown.
-const getRouteIndex = (path) =>
-  links.findIndex((l) => l.href === path || l.aliases.includes(path));
+// Normalize legacy and trailing-slash paths to the displayed route.
+const getRouteIndex = (path) => {
+  const normalizedPath = path.replace(/\/+$/, "") || "/";
+  const index = links.findIndex(
+    (link) =>
+      link.href === normalizedPath ||
+      link.aliases.includes(normalizedPath)
+  );
+
+  // Unknown paths render the home page through App's catch-all route.
+  return index === -1 ? 0 : index;
+};
 
 export default function Navbar() {
   const location = useLocation();
@@ -38,12 +48,11 @@ export default function Navbar() {
     targetIndex >= Math.max(currentIndex, 0) ? 1 : -1;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-200/80 bg-white/90 text-neutral-800 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 text-neutral-800 sm:px-6">
       <nav
         aria-label="Main navigation"
-        className="navbar-inner mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6"
+        className="navbar-inner mx-auto flex max-w-7xl flex-wrap items-center justify-between rounded-2xl border border-neutral-200/80 bg-[#F7F6F2]/95 px-3 py-2 shadow-sm shadow-neutral-900/5 backdrop-blur-sm sm:px-4"
       >
-        {/* Brand Logo with JetBrains Mono */}
         <Link
           to="/"
           state={{ pageDirection: getDirection(0) }}
@@ -56,8 +65,7 @@ export default function Navbar() {
           <span aria-hidden="true" className="text-[#E60000] transition-transform duration-300 group-hover:scale-110">/&gt;</span>
         </Link>
 
-        {/* Desktop Navigation Pills */}
-        <div className="hidden items-center gap-1 rounded-full border border-neutral-200 bg-neutral-100/80 p-1 md:flex">
+        <div className="ml-auto hidden items-center gap-1 rounded-full bg-neutral-100/80 p-1 md:flex">
           {links.map((link, index) => {
             const isActive = index === currentIndex;
 
@@ -67,10 +75,10 @@ export default function Navbar() {
                 to={link.href}
                 state={{ pageDirection: getDirection(index) }}
                 aria-current={isActive ? "page" : undefined}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 font-['Plus_Jakarta_Sans',_sans-serif] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E60000] ${
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200 font-['Plus_Jakarta_Sans',_sans-serif] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E60000] ${
                   isActive
                     ? "bg-white text-[#E60000] shadow-sm"
-                    : "text-neutral-600 hover:text-neutral-900"
+                    : "text-neutral-600 hover:bg-white/70 hover:text-neutral-950"
                 }`}
               >
                 {link.name}
@@ -79,18 +87,6 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Right Side: Terminal Badge (Desktop) */}
-        <div className="hidden items-center lg:flex">
-          <span className="flex items-center gap-2 rounded-full border border-[#E60000]/20 bg-[#E60000]/10 px-3 py-1.5 font-['Fira_Code',_monospace] text-xs font-medium text-[#E60000]">
-            <span
-              aria-hidden="true"
-              className="h-2 w-2 animate-pulse rounded-full bg-[#E60000] motion-reduce:animate-none"
-            />
-            python_dev.py
-          </span>
-        </div>
-
-        {/* Mobile Hamburger Toggle */}
         <button
           type="button"
           aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -101,51 +97,50 @@ export default function Navbar() {
               path === location.pathname ? null : location.pathname
             )
           }
-          className="flex h-11 w-11 items-center justify-center rounded-md text-2xl text-neutral-700 hover:text-[#E60000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E60000] md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-xl text-neutral-800 transition-colors hover:bg-neutral-100 hover:text-[#E60000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E60000] md:hidden"
         >
-          <span aria-hidden="true">{menuOpen ? "×" : "☰"}</span>
+          {menuOpen ? <X aria-hidden="true" size={22} /> : <Menu aria-hidden="true" size={22} />}
         </button>
+
+        <AnimatePresence initial={false}>
+          {menuOpen && (
+            <motion.div
+              id="mobile-menu"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.2,
+                ease: "easeInOut",
+              }}
+              className="basis-full overflow-hidden md:hidden"
+            >
+              <div className="flex flex-col gap-1 border-t border-neutral-200/80 py-2">
+                {links.map((link, index) => {
+                  const isActive = index === currentIndex;
+
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      state={{ pageDirection: getDirection(index) }}
+                      onClick={() => setOpenPath(null)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`flex min-h-11 w-full items-center rounded-xl px-4 py-3 text-left text-sm font-semibold font-['Plus_Jakarta_Sans',_sans-serif] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E60000] ${
+                        isActive
+                          ? "bg-red-50 text-[#E60000]"
+                          : "text-neutral-700 hover:bg-neutral-100"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
-
-      {/* Mobile Menu Dropdown */}
-      <AnimatePresence initial={false}>
-        {menuOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{
-              duration: shouldReduceMotion ? 0 : 0.2,
-              ease: "easeInOut",
-            }}
-            className="overflow-hidden border-t border-neutral-200 bg-white px-4 md:hidden"
-          >
-            <div className="mx-auto flex max-w-7xl flex-col gap-1 py-3">
-              {links.map((link, index) => {
-                const isActive = index === currentIndex;
-
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    state={{ pageDirection: getDirection(index) }}
-                    onClick={() => setOpenPath(null)}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`flex min-h-11 w-full items-center rounded-xl px-4 py-3 text-left text-sm font-semibold font-['Plus_Jakarta_Sans',_sans-serif] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E60000] ${
-                      isActive
-                        ? "bg-red-50 text-[#E60000]"
-                        : "text-neutral-600 hover:bg-neutral-100"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
 }

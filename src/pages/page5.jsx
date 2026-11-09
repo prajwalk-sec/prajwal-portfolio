@@ -10,7 +10,7 @@ const contactCards = [
     number: "01",
     title: "Email Me",
     description:
-      "Drop a line anytime for backend architecture, full-stack opportunities, or collaborations.",
+      "For backend roles, full-stack opportunities, and collaborations.",
     linkText: "prajwaladkar279@gmail.com",
     href: "mailto:prajwaladkar279@gmail.com",
     icon: <FaEnvelope />,
@@ -21,18 +21,18 @@ const contactCards = [
     number: "02",
     title: "Direct Call",
     description:
-      "Available for professional discussions, technical consultations, and project inquiries.",
+      "For professional inquiries and project discussions.",
     linkText: "Let's Talk",
     href: "tel:+916363435060",
     icon: <FaPhoneAlt />,
     rotate: 1,
-    pinColor: "bg-neutral-900",
+    pinColor: "bg-neutral-950",
   },
   {
     number: "03",
     title: "LinkedIn",
     description:
-      "Connect with my professional network, career updates, and background milestones.",
+      "Connect for professional updates and career opportunities.",
     linkText: "View Profile",
     href: "https://www.linkedin.com/in/prajwalkamalaksha/",
     icon: <FaLinkedin />,
@@ -43,12 +43,12 @@ const contactCards = [
     number: "04",
     title: "GitHub",
     description:
-      "Explore my source code repositories, full-stack apps, and open-source contributions.",
+      "Explore my code, full-stack apps, and open-source work.",
     linkText: "Explore Repos",
-    href: "https://github.com/PrajwalK-dev",
+    href: "https://github.com/prajwalk-sec",
     icon: <FaGithub />,
     rotate: 2,
-    pinColor: "bg-neutral-900",
+    pinColor: "bg-neutral-950",
   },
 ];
 
@@ -59,38 +59,38 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative isolate min-h-screen w-full flex flex-col justify-center px-4 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
+      aria-labelledby="contact-heading"
+      className="relative isolate min-h-screen w-full flex flex-col justify-center overflow-hidden bg-[#F7F6F2] px-4 pt-24 pb-12 text-neutral-950 sm:px-12 sm:pt-28 sm:pb-14 lg:px-16 lg:pt-32 lg:pb-16"
     >
       {/* Background Micro-Grid */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 opacity-30"
+        className="pointer-events-none absolute inset-0 z-0 opacity-35"
         style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px)
-          `,
-          backgroundSize: "60px 60px",
+          backgroundImage:
+            "linear-gradient(rgba(23, 23, 23, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 23, 23, 0.045) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+          maskImage: "linear-gradient(to bottom, black, transparent 85%)",
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl my-auto space-y-10 sm:space-y-12 lg:-translate-y-8">
+      <div className="relative z-10 mx-auto my-auto w-full max-w-6xl space-y-6 sm:space-y-8 lg:-translate-y-4">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="mb-2 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#E60000] font-['Plus_Jakarta_Sans',_sans-serif]">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 font-['JetBrains_Mono',_monospace] text-xs font-semibold uppercase tracking-[0.22em] text-[#E60000] sm:text-sm">
             GET IN TOUCH
           </p>
-          <h2 className="font-['Plus_Jakarta_Sans',_sans-serif] text-[clamp(1.75rem,7vw,3rem)] sm:text-5xl font-black uppercase tracking-tighter leading-tight text-neutral-900 mb-4">
+          <h1 id="contact-heading" className="mb-4 font-['Syne',_sans-serif] text-[clamp(1.75rem,5.8vw,4.5rem)] font-extrabold uppercase leading-[1.05] tracking-[-0.07em] text-neutral-950">
             LET&apos;S BUILD <span className="text-[#E60000]">TOGETHER.</span>
-          </h2>
-          <p className="text-neutral-600 text-sm sm:text-base font-['Plus_Jakarta_Sans',_sans-serif] leading-relaxed font-medium">
+          </h1>
+          <p className="font-['Plus_Jakarta_Sans',_sans-serif] text-sm font-medium leading-relaxed text-neutral-600 sm:text-base">
             Have a project in mind, an opportunity, or just want to connect?
             Reach out through any of the channels below.
           </p>
         </div>
 
         {/* Pinned Sticky Notes Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-6">
+        <div className="grid grid-cols-1 gap-5 pt-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-5">
           {contactCards.map((card, idx) => {
             const isExternal = card.href.startsWith("http");
             return (
@@ -113,7 +113,7 @@ export default function ContactSection() {
                     ? undefined
                     : { y: -8, scale: 1.03, rotate: 0 }
                 }
-                className="group relative flex min-w-0 flex-col justify-between p-5 sm:p-6 bg-neutral-50/90 rounded-2xl border border-neutral-200/90 shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(230,0,0,0.12)] hover:border-[#E60000]/50 transition-[box-shadow,border-color] duration-300 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000]"
+                className="group relative flex min-h-[230px] min-w-0 flex-col justify-between rounded-2xl border border-neutral-300/80 bg-white/75 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-[box-shadow,border-color,background-color] duration-300 hover:border-[#E60000]/50 hover:bg-white hover:shadow-[0_20px_40px_rgba(230,0,0,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000] sm:p-6"
               >
                 {/* Push Pin Graphic */}
                 <div
@@ -133,13 +133,13 @@ export default function ContactSection() {
                     </span>
                     <div
                       aria-hidden="true"
-                      className="w-10 h-10 rounded-xl bg-white border border-neutral-200 flex items-center justify-center text-[#E60000] shadow-sm group-hover:border-[#E60000]/40 transition-colors"
+                      className="flex h-10 w-10 items-center justify-center rounded-xl border border-neutral-200 bg-[#E60000]/10 text-[#E60000] shadow-sm transition-colors group-hover:border-[#E60000]/40 group-hover:bg-[#E60000]/15"
                     >
                       {card.icon}
                     </div>
                   </div>
 
-                  <h3 className="font-['Plus_Jakarta_Sans',_sans-serif] text-lg font-black uppercase tracking-tight text-neutral-900 mb-2">
+                  <h3 className="mb-2 font-['Syne',_sans-serif] text-lg font-extrabold uppercase tracking-[-0.03em] text-neutral-950">
                     {card.title}
                   </h3>
 
@@ -169,7 +169,7 @@ export default function ContactSection() {
         </div>
 
         {/* Footer Technical Tag */}
-        <div className="border-t border-neutral-200/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-['JetBrains_Mono',_monospace] text-neutral-500">
+        <div className="flex flex-col items-center justify-between gap-2 border-t border-neutral-300/80 pt-6 font-['JetBrains_Mono',_monospace] text-xs text-neutral-500 sm:flex-row">
           <span className="font-bold text-neutral-900">&lt;Prajwal.Contact /&gt;</span>
           <span className="text-neutral-600 font-medium">OPEN FOR OPPORTUNITIES</span>
         </div>

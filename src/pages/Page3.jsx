@@ -82,18 +82,16 @@ export default function SkillsSection() {
     <section
       id="skills"
       aria-labelledby="skills-heading"
-      className="relative isolate min-h-screen w-full flex flex-col justify-center px-4 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
+      className="relative isolate min-h-screen w-full flex flex-col justify-center overflow-hidden bg-[#F7F6F2] px-4 pt-24 pb-16 text-neutral-950 sm:px-12 sm:pt-28 sm:pb-20 lg:px-16 lg:pt-32 lg:pb-24"
     >
       {/* Background grid, faded toward the edges so it never competes with content */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px)
-          `,
-          backgroundSize: "56px 56px",
+          backgroundImage:
+            "linear-gradient(rgba(23, 23, 23, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 23, 23, 0.045) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
           WebkitMaskImage:
             "radial-gradient(ellipse 75% 65% at 55% 50%, #000 20%, transparent 100%)",
           maskImage:
@@ -105,41 +103,43 @@ export default function SkillsSection() {
       <span
         aria-hidden="true"
         className={`${SANS} pointer-events-none select-none absolute -bottom-6 -left-4 z-0 hidden lg:block text-[15rem] xl:text-[19rem] font-black leading-none tracking-tighter text-transparent`}
-        style={{ WebkitTextStroke: "1.5px rgba(230, 0, 0, 0.12)" }}
+        style={{ WebkitTextStroke: "1.5px rgba(230, 0, 0, 0.1)" }}
       >
         STACK
       </span>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl lg:-translate-y-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-x-24 lg:gap-y-16">
           {/* LEFT: heading + intro */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 flex flex-col justify-center"
+            className="min-w-0 lg:col-span-5 flex flex-col justify-center"
           >
-            <span aria-hidden="true" className="mb-6 block h-1.5 w-14 rounded-full bg-[#E60000]" />
+            <p className="mb-3 font-['JetBrains_Mono',_monospace] text-xs font-semibold uppercase tracking-[0.22em] text-[#E60000] sm:text-sm">
+              WHAT I WORK WITH
+            </p>
 
-            <h2
+            <h1
               id="skills-heading"
-              className={`${SANS} text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[1.02] text-neutral-900 mb-6`}
+              className="mb-7 font-['Syne',_sans-serif] text-[clamp(1.5rem,9vw,3.75rem)] font-extrabold uppercase leading-[1.08] tracking-[-0.06em] text-neutral-950 sm:text-5xl lg:text-[clamp(2.5rem,3.5vw,3.15rem)]"
             >
               Technical <br />
               <span className="text-[#E60000]">expertise.</span>
-            </h2>
+            </h1>
 
             <p
-              className={`${SANS} max-w-md text-neutral-600 text-base lg:text-lg leading-relaxed font-medium`}
+              className={`${SANS} max-w-md text-sm font-medium leading-relaxed text-neutral-600 sm:text-base lg:text-lg`}
             >
-              Bridging human creativity and machine intelligence. Architecting
-              production-ready backend systems, robust APIs, and scalable web
-              solutions with rigorous attention to detail.
+              I build dependable web applications with Python and Django, create
+              clean REST APIs, and bring them to life with polished React
+              interfaces.
             </p>
           </motion.div>
 
           {/* RIGHT: tools grouped by what they do */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 lg:border-l lg:border-neutral-300/80 lg:pl-10">
             <div className="border-b border-neutral-200">
               {techGroups.map((group, gIdx) => (
                 <motion.div
@@ -148,7 +148,7 @@ export default function SkillsSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.5, delay: gIdx * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-6 gap-y-3 border-t border-neutral-200 py-5"
+                  className="grid grid-cols-1 gap-x-6 gap-y-3 border-t border-neutral-300/80 py-5 sm:grid-cols-[10rem_1fr]"
                 >
                   <h3
                     className={`${SANS} text-sm font-bold text-neutral-500 sm:pt-2.5`}
@@ -160,12 +160,12 @@ export default function SkillsSection() {
                     {group.tools.map((tool) => (
                       <li
                         key={tool.name}
-                        className="group inline-flex items-center gap-2.5 rounded-full border border-neutral-200 bg-white py-1.5 pl-1.5 pr-4 transition-colors duration-200 motion-reduce:transition-none hover:border-[var(--brand)] hover:shadow-sm cursor-default"
+                        className="group inline-flex cursor-default items-center gap-2.5 rounded-full border border-neutral-300/80 bg-white/70 py-1.5 pl-1.5 pr-4 transition-colors duration-200 hover:border-[var(--brand)] hover:bg-white hover:shadow-sm motion-reduce:transition-none"
                         style={{ "--brand": tool.color, "--ink": tool.ink, "--on": tool.on }}
                       >
                         <span
                           aria-hidden="true"
-                          className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-100 text-lg text-[var(--ink)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-[var(--brand)] group-hover:text-[var(--on)]"
+                          className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E60000]/10 text-lg text-[var(--ink)] transition-colors duration-200 group-hover:bg-[var(--brand)] group-hover:text-[var(--on)] motion-reduce:transition-none"
                         >
                           {tool.icon}
                         </span>

@@ -11,13 +11,42 @@ import Page4 from "./pages/Page4"; // Import your new Projects section
 import Page5 from "./pages/page5";
 
 const getRouteIndex = (path) => {
-  if (path === "/" || path === "/page1") return 0;
-  if (path === "/about" || path === "/page2") return 1;
-  if (path === "/skills" || path === "/page3") return 2;
-  if (path === "/projects" || path === "/page4") return 3;
-  if (path === "/contact" || path === "/page5") return 4;
+  const normalizedPath = path.replace(/\/+$/, "") || "/";
+  if (normalizedPath === "/" || normalizedPath === "/page1") return 0;
+  if (normalizedPath === "/about" || normalizedPath === "/page2") return 1;
+  if (normalizedPath === "/skills" || normalizedPath === "/page3") return 2;
+  if (normalizedPath === "/projects" || normalizedPath === "/page4") return 3;
+  if (normalizedPath === "/contact" || normalizedPath === "/page5") return 4;
   return 0;
 };
+
+const pageMetadata = [
+  {
+    title: "Prajwal K. | Full-Stack Engineer",
+    description:
+      "Prajwal K. is a full-stack software engineer building dependable web applications with Python, Django, FastAPI, and React.",
+  },
+  {
+    title: "About | Prajwal K.",
+    description:
+      "Learn about Prajwal K.'s experience building scalable systems, backend services, and polished web applications.",
+  },
+  {
+    title: "Skills | Prajwal K.",
+    description:
+      "Explore Prajwal K.'s skills across Python, Django, APIs, React, databases, and infrastructure.",
+  },
+  {
+    title: "Projects | Prajwal K.",
+    description:
+      "Browse selected full-stack and cybersecurity projects by Prajwal K.",
+  },
+  {
+    title: "Contact | Prajwal K.",
+    description:
+      "Get in touch with Prajwal K. about software engineering opportunities and collaborations.",
+  },
+];
 
 function App() {
   const location = useLocation();
@@ -29,6 +58,14 @@ function App() {
     navigationType === "POP"
       ? popDirection
       : location.state?.pageDirection ?? 1;
+
+  useEffect(() => {
+    const { title, description } = pageMetadata[getRouteIndex(location.pathname)];
+    document.title = title;
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", description);
+  }, [location.pathname]);
 
   useLayoutEffect(() => {
     previousPath.current = location.pathname;
@@ -64,27 +101,32 @@ function App() {
           custom={pageDirection}
           variants={{
             enter: (direction) => ({
-              y: shouldReduceMotion ? 0 : direction > 0 ? "2.5rem" : "-2.5rem",
+              y: shouldReduceMotion ? 0 : direction > 0 ? "-35vh" : "35vh",
               opacity: shouldReduceMotion ? 1 : 0,
-              scale: shouldReduceMotion ? 1 : 0.985,
-              filter: shouldReduceMotion ? "blur(0px)" : "blur(8px)",
+              scale: shouldReduceMotion ? 1 : 0.99,
+              filter: shouldReduceMotion ? "blur(0px)" : "blur(6px)",
             }),
-            center: { y: 0, opacity: 1, scale: 1, filter: "blur(0px)" },
+            center: {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              filter: "blur(0px)",
+            },
             exit: (direction) => ({
-              y: shouldReduceMotion ? 0 : direction > 0 ? "-2.5rem" : "2.5rem",
+              y: shouldReduceMotion ? 0 : direction > 0 ? "35vh" : "-35vh",
               opacity: shouldReduceMotion ? 1 : 0,
-              scale: shouldReduceMotion ? 1 : 0.985,
-              filter: shouldReduceMotion ? "blur(0px)" : "blur(8px)",
+              scale: shouldReduceMotion ? 1 : 0.99,
+              filter: shouldReduceMotion ? "blur(0px)" : "blur(12px)",
             }),
           }}
           initial="enter"
           animate="center"
           exit="exit"
           transition={{
-            duration: shouldReduceMotion ? 0 : 0.6,
+            duration: shouldReduceMotion ? 0 : 0.72,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="min-h-screen"
+          className="min-h-screen will-change-transform"
         >
           <Routes location={location}>
             <Route path="/" element={<Page1 />} />

@@ -20,6 +20,8 @@ const PROJECTS_DATA = [
     ],
     github: "https://github.com/PrajwalK-dev",
     live: "https://homenest-q4ji.onrender.com/",
+    codeLabel: "GITHUB PROFILE",
+    liveLabel: "LIVE DEMO",
     highlight: "Featured"
   },
   {
@@ -36,6 +38,7 @@ const PROJECTS_DATA = [
     ],
     github: "https://github.com/prajwalk-sec/threat-intelligence-dashboard",
     live: "https://github.com/prajwalk-sec/threat-intelligence-dashboard",
+    codeLabel: "CODE",
     highlight: "Security"
   },
   {
@@ -52,6 +55,7 @@ const PROJECTS_DATA = [
     ],
     github: "https://github.com/prajwalk-sec/Cybersecurity-Vulnerability-Scanner",
     live: "https://github.com/prajwalk-sec/Cybersecurity-Vulnerability-Scanner",
+    codeLabel: "CODE",
     highlight: "Tool"
   }
 ];
@@ -78,43 +82,39 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative isolate min-h-screen w-full flex flex-col justify-center px-4 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
+      aria-labelledby="projects-heading"
+      className="relative isolate min-h-screen w-full flex flex-col justify-center overflow-hidden bg-[#F7F6F2] px-4 pt-24 pb-16 text-neutral-950 sm:px-12 sm:pt-28 sm:pb-20 lg:px-16 lg:pt-32 lg:pb-24"
     >
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
-      `}</style>
-
       {/* Background Micro-Grid */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 opacity-30"
+        className="pointer-events-none absolute inset-0 z-0 opacity-35"
         style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px)
-          `,
-          backgroundSize: "60px 60px",
+          backgroundImage:
+            "linear-gradient(rgba(23, 23, 23, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 23, 23, 0.045) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+          maskImage: "linear-gradient(to bottom, black, transparent 85%)",
         }}
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl my-auto">
         
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 border-b border-neutral-200 pb-5 gap-4">
+        <div className="mb-8 flex flex-col items-start justify-between gap-4 border-b border-neutral-300/80 pb-5 sm:flex-row sm:items-end">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#E60000] font-['Plus_Jakarta_Sans',_sans-serif] mb-1">
+            <p className="mb-2 font-['JetBrains_Mono',_monospace] text-xs font-semibold uppercase tracking-[0.22em] text-[#E60000]">
               Portfolio Showcase
             </p>
-            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter text-neutral-900 font-['Plus_Jakarta_Sans',_sans-serif] leading-none">
+            <h1 id="projects-heading" className="font-['Syne',_sans-serif] text-4xl font-extrabold uppercase leading-[1.05] tracking-[-0.06em] text-neutral-950 sm:text-5xl lg:text-6xl">
               SELECTED <span className="text-[#E60000]">WORK</span>
-            </h2>
+            </h1>
           </div>
 
           <a
             href="https://github.com/PrajwalK-dev"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#E60000] hover:text-neutral-900 transition-colors font-['Plus_Jakarta_Sans',_sans-serif]"
+            className="inline-flex min-h-10 items-center gap-1.5 font-['Plus_Jakarta_Sans',_sans-serif] text-xs font-bold uppercase tracking-wider text-[#E60000] transition-colors hover:text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000]"
           >
             <span>GITHUB REPOS</span>
             <span className="text-sm font-normal">↗</span>
@@ -122,14 +122,15 @@ export default function ProjectsSection() {
         </div>
 
         {/* Filter Category Tabs */}
-        <div className="mb-6 flex flex-wrap items-center gap-2">
+        <div aria-label="Filter projects" className="mb-6 flex flex-wrap items-center gap-2" role="group">
           {FILTER_TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-300 font-['Plus_Jakarta_Sans',_sans-serif] ${
+              aria-pressed={activeTab === tab.id}
+              className={`min-h-10 rounded-full px-4 py-2 font-['Plus_Jakarta_Sans',_sans-serif] text-xs font-semibold transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E60000] ${
                 activeTab === tab.id
-                  ? "bg-[#E60000] text-white shadow-[0_4px_12px_rgba(230,0,0,0.25)]"
+                  ? "bg-neutral-950 text-white shadow-md"
                   : "bg-neutral-100 text-neutral-600 border border-neutral-200 hover:bg-red-50 hover:text-[#E60000]"
               }`}
             >
@@ -155,7 +156,7 @@ export default function ProjectsSection() {
                 duration: shouldReduceMotion ? 0 : 0.3,
                 delay: shouldReduceMotion ? 0 : idx * 0.08,
               }}
-              className={`group relative min-h-[300px] h-auto min-w-0 rounded-2xl overflow-hidden p-4 sm:p-5 flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${project.bgTheme}`}
+              className={`group relative flex h-auto min-h-[300px] min-w-0 flex-col justify-between overflow-hidden rounded-2xl p-4 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl focus-within:ring-2 focus-within:ring-[#E60000] focus-within:ring-offset-2 sm:p-5 ${project.bgTheme}`}
             >
               {/* Top Accent Gradient overlay */}
               <div
@@ -177,7 +178,7 @@ export default function ProjectsSection() {
 
               {/* Compact Center Title & Description */}
               <div className="relative z-10 my-auto">
-                <h3 className="text-2xl font-black uppercase tracking-tighter leading-tight font-['Plus_Jakarta_Sans',_sans-serif] group-hover:text-[#E60000] transition-colors duration-300">
+                <h3 className="font-['Syne',_sans-serif] text-2xl font-extrabold uppercase leading-tight tracking-[-0.04em] transition-colors duration-300 group-hover:text-[#E60000]">
                   {project.title}
                 </h3>
                 <p className="mt-2 text-xs font-medium line-clamp-3 opacity-80 font-['Plus_Jakarta_Sans',_sans-serif] leading-relaxed">
@@ -206,19 +207,21 @@ export default function ProjectsSection() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] font-bold hover:text-[#E60000] transition-colors font-['Plus_Jakarta_Sans',_sans-serif]"
+                    className="inline-flex min-h-9 items-center gap-1 rounded px-2 text-[11px] font-bold transition-colors hover:text-[#E60000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E60000] font-['Plus_Jakarta_Sans',_sans-serif]"
                   >
-                    <FaGithub className="text-xs" /> CODE
+                    <FaGithub className="text-xs" /> {project.codeLabel}
                   </a>
 
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded bg-[#E60000] text-white hover:bg-red-700 transition-colors font-['Plus_Jakarta_Sans',_sans-serif]"
-                  >
-                    DEMO <FaExternalLinkAlt className="text-[8px]" />
-                  </a>
+                  {project.live !== project.github && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-9 items-center gap-1 rounded-full bg-[#E60000] px-3 text-[11px] font-bold text-white transition-colors hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E60000] font-['Plus_Jakarta_Sans',_sans-serif]"
+                    >
+                      {project.liveLabel} <FaExternalLinkAlt className="text-[8px]" />
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -21,30 +21,29 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative isolate min-h-screen w-full flex flex-col justify-center px-4 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24 bg-white text-neutral-900 overflow-hidden"
+      className="relative isolate min-h-screen w-full flex flex-col justify-center overflow-hidden bg-[#F7F6F2] px-4 pt-24 pb-16 text-neutral-950 sm:px-12 sm:pt-28 sm:pb-20 lg:px-16 lg:pt-32 lg:pb-24"
     >
       {/* Background Micro-Grid */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 opacity-30"
+        className="pointer-events-none absolute inset-0 z-0 opacity-35"
         style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px)
-          `,
-          backgroundSize: "60px 60px",
+          backgroundImage:
+            "linear-gradient(rgba(23, 23, 23, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 23, 23, 0.045) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+          maskImage: "linear-gradient(to bottom, black, transparent 85%)",
         }}
       />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 items-center">
           {/* LEFT COLUMN: Editorial Bio */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <p className="mb-3 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#E60000] font-['Plus_Jakarta_Sans',_sans-serif]">
+          <div className="min-w-0 lg:col-span-5 flex flex-col justify-center">
+            <p className="mb-3 font-['JetBrains_Mono',_monospace] text-xs font-semibold uppercase tracking-[0.22em] text-[#E60000] sm:text-sm">
               ABOUT ME
             </p>
 
-            <h1 className="font-['Plus_Jakarta_Sans',_sans-serif] text-[clamp(1.75rem,7vw,3rem)] sm:text-5xl font-black uppercase tracking-tighter leading-[1.02] text-neutral-900 mb-6">
+            <h1 className="mb-6 font-['Syne',_sans-serif] text-[clamp(1.25rem,7.2vw,3rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.06em] text-neutral-950 sm:text-[clamp(2rem,4.2vw,3rem)] lg:text-[clamp(1.9rem,3vw,2.7rem)]">
               ENGINEERING SCALABLE SYSTEMS WITH PRECISION &amp; CREATIVITY.
             </h1>
 
@@ -73,7 +72,7 @@ export default function AboutSection() {
               initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="absolute bottom-0 right-4 lg:right-0 w-[78%] max-w-full h-[88%] bg-[#E60000] rounded-xl z-0 shadow-lg"
+              className="absolute bottom-0 right-4 z-0 h-[88%] w-[78%] max-w-full rounded-xl bg-[#E8C6C1] shadow-lg lg:right-0"
             />
             {/* Portrait Cutout */}
             <img
@@ -119,7 +118,7 @@ export default function AboutSection() {
                         delay: index * 0.1,
                         ease: "easeOut",
                       }}
-                      className="h-full bg-[#E60000] rounded-full"
+                      className="h-full rounded-full bg-[#E60000]"
                     />
                   </div>
                 </div>
@@ -131,7 +130,7 @@ export default function AboutSection() {
               <a
                 href={RESUME_HREF}
                 download={RESUME_FILE_NAME}
-                className="group inline-flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-3.5 border-2 border-neutral-900 text-neutral-900 hover:bg-[#E60000] hover:border-[#E60000] hover:text-white transition-all duration-300 font-bold text-xs sm:text-sm uppercase tracking-wider font-['Plus_Jakarta_Sans',_sans-serif] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000]"
+                className="group inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-neutral-950 px-8 py-3.5 font-['Plus_Jakarta_Sans',_sans-serif] text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-neutral-950/10 transition duration-300 hover:-translate-y-1 hover:bg-[#E60000] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000] sm:w-auto sm:text-sm"
               >
                 <span>DOWNLOAD RESUME</span>
                 <FaDownload
