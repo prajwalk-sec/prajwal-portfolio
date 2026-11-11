@@ -164,7 +164,7 @@ export default function Page1() {
             />
             <div
               aria-hidden="true"
-              className="absolute right-0 top-8 z-20 rounded-xl border border-neutral-900/10 bg-white/90 px-4 py-3 font-['JetBrains_Mono',_monospace] text-[10px] font-bold uppercase tracking-[0.14em] text-neutral-600 shadow-lg backdrop-blur sm:right-1 sm:top-12"
+              className="absolute right-0 top-8 z-20 hidden rounded-xl border border-neutral-900/10 bg-white/90 px-4 py-3 font-['JetBrains_Mono',_monospace] text-[10px] font-bold uppercase tracking-[0.14em] text-neutral-600 shadow-lg backdrop-blur sm:right-1 sm:top-12 lg:block"
             >
               <span className="mb-1 block text-[#E60000]">01 / 05</span>
               Developer portfolio

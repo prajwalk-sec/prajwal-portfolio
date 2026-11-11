@@ -16,7 +16,9 @@ import {
   SiLinux,
   SiRedis,
   SiNginx,
-  SiTypescript,
+  SiHtml5,
+  SiCss,
+  SiSqlite,
 } from "react-icons/si";
 
 /**
@@ -39,12 +41,12 @@ const techGroups = [
     tools: [
       { icon: <SiPython />, name: "Python", color: "#3776AB", ink: "#3776AB", on: "#fff" },
       { icon: <SiJavascript />, name: "JavaScript", color: "#F7DF1E", ink: "#A18F00", on: "#000" },
-      { icon: <SiTypescript />, name: "TypeScript", color: "#3178C6", ink: "#3178C6", on: "#fff" },
     ],
   },
   {
     label: "Databases",
     tools: [
+      { icon: <SiSqlite />, name: "SQL", color: "#003B57", ink: "#003B57", on: "#fff" },
       { icon: <SiPostgresql />, name: "PostgreSQL", color: "#4169E1", ink: "#4169E1", on: "#fff" },
       { icon: <SiMongodb />, name: "MongoDB", color: "#47A248", ink: "#3D8B3F", on: "#fff" },
       { icon: <SiRedis />, name: "Redis", color: "#DC382D", ink: "#DC382D", on: "#fff" },
@@ -53,6 +55,8 @@ const techGroups = [
   {
     label: "Frontend",
     tools: [
+      { icon: <SiHtml5 />, name: "HTML", color: "#E34F26", ink: "#E34F26", on: "#fff" },
+      { icon: <SiCss />, name: "CSS", color: "#1572B6", ink: "#1572B6", on: "#fff" },
       { icon: <SiReact />, name: "React", color: "#61DAFB", ink: "#0E8FB8", on: "#000" },
       { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "#06B6D4", ink: "#0891B2", on: "#fff" },
     ],
