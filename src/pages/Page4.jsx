@@ -18,9 +18,9 @@ const PROJECTS_DATA = [
       { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-400 text-[10px]" /> },
       { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-400 text-[10px]" /> }
     ],
-    github: "https://github.com/PrajwalK-dev",
+    github: "https://github.com/prajwalk-sec/HomeNest",
     live: "https://homenest-q4ji.onrender.com/",
-    codeLabel: "GITHUB PROFILE",
+    codeLabel: "CODE",
     liveLabel: "LIVE DEMO",
     highlight: "Featured"
   },
