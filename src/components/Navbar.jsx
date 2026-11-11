@@ -57,12 +57,9 @@ export default function Navbar() {
           to="/"
           state={{ pageDirection: getDirection(0) }}
           aria-label="Prajwal, go to home"
-          className="group flex items-center gap-1 rounded-md bg-transparent font-['JetBrains_Mono',_monospace] text-xl font-bold tracking-tight text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000] sm:text-2xl"
+          className="group flex items-center rounded-md bg-transparent font-['Allura',_cursive] text-3xl font-normal leading-none text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E60000] sm:text-4xl"
         >
-          <span aria-hidden="true" className="text-[#E60000] transition-transform duration-300 group-hover:scale-110">&lt;</span>
           <span aria-hidden="true">Prajwal</span>
-          <span aria-hidden="true" className="text-[#E60000]">.</span>
-          <span aria-hidden="true" className="text-[#E60000] transition-transform duration-300 group-hover:scale-110">/&gt;</span>
         </Link>
 
         <div className="ml-auto hidden items-center gap-1 rounded-full bg-neutral-100/80 p-1 md:flex">
