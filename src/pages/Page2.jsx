@@ -78,6 +78,7 @@ export default function AboutSection() {
             <img
               src="/prajwal-photo-about.png"
               alt="Portrait of Prajwal"
+              data-hide-custom-cursor
               decoding="async"
               className="relative z-10 h-full w-auto object-contain object-bottom grayscale contrast-125 drop-shadow-[0_20px_28px_rgba(0,0,0,0.20)]"
             />

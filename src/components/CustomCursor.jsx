@@ -5,11 +5,13 @@ export default function CustomCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isPointer, setIsPointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
+      setIsHidden(Boolean(e.target.closest("[data-hide-custom-cursor]")));
 
       const target = e.target;
       const isClickable = 
@@ -34,9 +36,9 @@ export default function CustomCursor() {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible]);
+  }, []);
 
-  if (!isVisible) return null;
+  if (!isVisible || isHidden) return null;
 
   return (
     <div 
